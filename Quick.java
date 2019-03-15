@@ -3,25 +3,52 @@ public class Quick {
   Use Dutch partition sort.
  */
 
-  public static int quickSelect(int[] data, int k) {
-    int[][] dataH = partition(data, 0, data.length-1);
-    int max = data.length-1;
-    int min = 0;
-    while (dataH[1][0] != k) {
-      if (k < dataH[1][0]) {
-        max = dataH[1][0] - 1;
-        dataH = partition(dataH[0], min, dataH[1][0]-1);
+ public static int quickselect(int [] data, int k){
+
+   int pivot = data.length;
+   int start = 0;
+   int end = data.length - 1;
+
+   while(pivot != k){
+       pivot = partition(data, start, end);
+       if(pivot > k){
+           end = pivot - 1;
+       }else if(pivot < k){
+           start = pivot + 1;
+       }
+   }
+
+   return data[pivot];
+ }
+
+ private static int partition(int[] data,int start,int end){
+ 	if (data.length < 2){
+ 	    return start;
+ 	}
+
+ 	int s = start;
+ 	int pivot = (int)(Math.random() * (end - start + 1));
+
+ 	pivot += start;
+ 	int pv = data[pivot];
+
+ 	swap(data,pivot,end);
+
+ 	while (start < end + 1){
+ 	    if(data[start] < pv){
+ 		     swap(data,start,s);
+ 		      s++;
+        }
+        start++;
       }
-      else {
-        min = dataH[1][0]+1;
-        dataH = partition(dataH[0], dataH[1][0]+1, max);
-      }
+      swap(data,s,end);
+      return s;
     }
-    return dataH[0][k];
-  }
-
-public static int partition (int [] data, int start, int end){
-
+private static void swap(int[] data, int a, int b) {
+  int c = data[a];
+  data[a] = data[b];
+  data[b] = c;
+   }
 
 /*Modify the array to be in increasing order.
  */
