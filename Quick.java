@@ -1,3 +1,6 @@
+import java.util.* ;
+import java.io.* ;
+
 public class Quick {
   /*return the value that is the kth smallest value of the array.
   Use Dutch partition sort.
@@ -53,7 +56,9 @@ private static void swap(int[] data, int a, int b) {
 /*Modify the array to be in increasing order.
  */
  public static void quicksort(int[] data) {
-   quicksortH(data, 0, data.length - 1);
+   if (data.length > 0){
+     quicksortH(data, 0, data.length - 1);
+   }
  }
 
  /*Modify the array such that:
@@ -73,6 +78,7 @@ private static void swap(int[] data, int a, int b) {
    quicksortH(data, lo, hi - 1);
    quicksortH(data, pivot + 1, hi);
  }
+
  public static void main(String[]args){
   System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
   int[]MAX_LIST = {1000000000,500,10};
