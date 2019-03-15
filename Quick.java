@@ -24,34 +24,53 @@ public class Quick {
    return data[pivot];
  }
 
- private static int partition(int[] data,int start,int end){
- 	if (data.length < 2){
- 	    return start;
- 	}
+ public static int partition (int [] data, int start, int end){
+    Random random = new Random();
+    int index = Math.abs(random.nextInt()) % (end - start + 1) + start;
+    int value = data[index];
+    int placeholder =0;
+    int beg = start;
 
- 	int s = start;
- 	int pivot = (int)(Math.random() * (end - start + 1));
+    data[index] = data[start];
+    data[start] = value;
+    start += 1;
+    while (start < end){
 
- 	pivot += start;
- 	int pv = data[pivot];
-
- 	swap(data,pivot,end);
-
- 	while (start < end + 1){
- 	    if(data[start] < pv){
- 		     swap(data,start,s);
- 		      s++;
-        }
-        start++;
+      if (data[start] < value){
+        start +=1;
       }
-      swap(data,s,end);
-      return s;
+      if (data[start] > value){
+        placeholder = data[end];
+        data[end] = data[start];
+        data[start] = placeholder;
+        end -= 1;
+      }
+      if (data[start] == value){
+        int rand = Math.abs(random.nextInt()) % 2;
+        if(rand == 0){
+          start +=1;
+        }
+        if(rand ==1){
+          placeholder = data[end];
+          data[end] = data[start];
+          data[start] = placeholder;
+          end -=1;
+        }
+      }
     }
-private static void swap(int[] data, int a, int b) {
-  int c = data[a];
-  data[a] = data[b];
-  data[b] = c;
-   }
+
+    if(data[start] < value){
+      data[beg] = data[start];
+      data[start] = value;
+      return start;
+    }
+    if(data[start] > value){
+      data[beg] = data[start -1];
+      data[start-1] = value;
+      return start -1;
+    }
+    return start;
+  }
 
 /*Modify the array to be in increasing order.
  */
