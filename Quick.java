@@ -6,6 +6,7 @@ public class Quick {
   Use Dutch partition sort.
  */
 
+//The quicksort method.
  public static int quickselect(int [] data, int k){
 
    int pivot = data.length;
@@ -16,11 +17,10 @@ public class Quick {
        pivot = partition(data, start, end);
        if(pivot > k){
            end = pivot - 1;
-       }else if(pivot < k){
+       }else if (pivot < k){
            start = pivot + 1;
        }
    }
-
    return data[pivot];
  }
 
@@ -28,7 +28,7 @@ public class Quick {
     Random random = new Random();
     int index = Math.abs(random.nextInt()) % (end - start + 1) + start;
     int value = data[index];
-    int placeholder =0;
+    int count = 0;
     int beg = start;
 
     data[index] = data[start];
@@ -40,9 +40,9 @@ public class Quick {
         start +=1;
       }
       if (data[start] > value){
-        placeholder = data[end];
+        count = data[end];
         data[end] = data[start];
-        data[start] = placeholder;
+        data[start] = count;
         end -= 1;
       }
       if (data[start] == value){
@@ -51,9 +51,9 @@ public class Quick {
           start +=1;
         }
         if(rand ==1){
-          placeholder = data[end];
+          count = data[end];
           data[end] = data[start];
-          data[start] = placeholder;
+          data[start] = count;
           end -=1;
         }
       }
