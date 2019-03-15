@@ -75,7 +75,7 @@ private static void swap(int[] data, int a, int b) {
      return;
    }
    int pivot = partition(data, lo, hi);
-   quicksortH(data, lo, hi - 1);
+   quicksortH(data, lo, pivot - 1);
    quicksortH(data, pivot + 1, hi);
  }
 
